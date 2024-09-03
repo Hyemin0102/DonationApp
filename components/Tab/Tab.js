@@ -16,8 +16,8 @@ const Tab = props => {
   return (
     <Pressable
       style={[style.tab, props.isInactive && style.inactiveTab, tabWidth]}
-      disabled={props.isInactive}
-      onPress={() => props.onPress()}>
+      //클릭하면 dispatch에 탭아이디를 넘겨줌
+      onPress={() => props.onPress(props.tabId)}>
       <Text
         onTextLayout={event => {
           //console.log('event', event.nativeEvent);
@@ -34,9 +34,11 @@ const Tab = props => {
 Tab.default = {
   isInactive: false,
   onPress: () => {}, //빈 함수로 디폴트
+  tabId: 1,
 };
 
 Tab.propTypes = {
+  tabId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isInactive: PropTypes.bool,
   onPress: PropTypes.func,
