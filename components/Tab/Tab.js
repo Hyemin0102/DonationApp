@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import style from './style';
 import {horizontalScale} from '../../assets/styles/scaling';
 
-const Tab = props => {
+const Tab = ({
+  tabId,
+  title,
+  isInactive = false,
+  onPress = () => {},
+  ...otherProps
+}) => {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
   const paddingHorizontal = 33;
@@ -15,26 +21,20 @@ const Tab = props => {
   };
   return (
     <Pressable
-      style={[style.tab, props.isInactive && style.inactiveTab, tabWidth]}
+      style={[style.tab, isInactive && style.inactiveTab, tabWidth]}
       //클릭하면 dispatch에 탭아이디를 넘겨줌
-      onPress={() => props.onPress(props.tabId)}>
+      onPress={() => onPress(tabId)}>
       <Text
         onTextLayout={event => {
           //console.log('event', event.nativeEvent);
           setWidth(event.nativeEvent.lines[0].width);
         }}
         ref={textRef}
-        style={[style.title, props.isInactive && style.inactiveTitle]}>
-        {props.title}
+        style={[style.title, isInactive && style.inactiveTitle]}>
+        {title}
       </Text>
     </Pressable>
   );
-};
-
-Tab.default = {
-  isInactive: false,
-  onPress: () => {}, //빈 함수로 디폴트
-  tabId: 1,
 };
 
 Tab.propTypes = {

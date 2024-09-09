@@ -5,7 +5,11 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import style from './style';
 import {PropTypes} from 'prop-types';
 
-const Search = props => {
+const Search = ({
+  onSearch = () => {},
+  placeholder = 'Search',
+  ...otherProps
+}) => {
   const textInputRef = useRef(null);
   const [search, setSearch] = useState('');
   const handleFocus = () => {
@@ -14,7 +18,7 @@ const Search = props => {
 
   const handleSearch = searchValue => {
     setSearch(searchValue);
-    props.onSearch(searchValue); //props로 넘어온 함수에 입력값 전달
+    onSearch(searchValue); //props로 넘어온 함수에 입력값 전달
   };
 
   return (
@@ -23,16 +27,12 @@ const Search = props => {
       <TextInput
         ref={textInputRef}
         style={style.searchInput}
-        placeholder={props.placeholder}
+        placeholder={placeholder}
         value={search}
         onChangeText={value => handleSearch(value)}
       />
     </Pressable>
   );
-};
-Search.defaultProps = {
-  onSearch: () => {},
-  placeholder: 'Search',
 };
 
 Search.propTypes = {

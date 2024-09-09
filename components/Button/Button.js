@@ -2,22 +2,16 @@ import React from 'react';
 import {Pressable, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import style from './style';
-import {logPlugin} from '@babel/preset-env/lib/debug';
 
-const Button = props => {
+const Button = ({isDisabled = 'false', onPress = () => {}, title}) => {
   return (
     <Pressable
-      style={[style.button, props.isDisabled && style.disable]}
-      disabled={props.isDisabled}
-      onPress={props.onPress}>
-      <Text style={style.title}>{props.title}</Text>
+      style={[style.button, isDisabled && style.disable]}
+      disabled={isDisabled}
+      onPress={onPress}>
+      <Text style={style.title}>{title}</Text>
     </Pressable>
   );
-};
-
-Button.default = {
-  isDisabled: false,
-  onPress: () => {}, //빈 함수로 디폴트
 };
 
 Button.propTypes = {

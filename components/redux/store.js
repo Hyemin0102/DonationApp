@@ -5,10 +5,12 @@ import {logger} from 'redux-logger';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
 import Categories from './reducers/Categories';
+import Donations from './reducers/Donations';
 
 const rootReducer = combineReducers({
   user: User,
   categories: Categories,
+  donations: Donations,
 });
 const configuration = {
   key: 'root',
@@ -20,8 +22,11 @@ const store = configureStore({
   reducer: persistedReducer,
   //미들웨어 - 액션 디스패치되면 콘솔에 이전,액션,다음상태 로그 확인 가능
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({serializableCheck: false}).concat(logger),
+    getDefaultMiddleware({serializableCheck: false}),
+  //.concat(logger),
 });
 
 export default store;
 export const persistor = persistStore(store);
+
+persistor.purge();

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import style from './style';
 import {horizontalScale} from '../../assets/styles/scaling';
 
-const Badge = props => {
+const Badge = ({isInactive = 'false', title}) => {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
   const paddingHorizontal = 10;
@@ -22,14 +22,10 @@ const Badge = props => {
         }}
         ref={textRef}
         style={style.title}>
-        {props.title}
+        {title}
       </Text>
     </View>
   );
-};
-
-Badge.default = {
-  isInactive: false,
 };
 
 Badge.propTypes = {

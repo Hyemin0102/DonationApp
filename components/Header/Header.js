@@ -3,9 +3,9 @@ import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 import style from './style';
 
-const Header = props => {
+const Header = ({title = '', type = 1, color = '#000', ...otherProps}) => {
   const styleToApply = () => {
-    switch (props.type) {
+    switch (type) {
       case 1:
         return style.title1;
       case 2:
@@ -19,17 +19,9 @@ const Header = props => {
 
   return (
     <View>
-      <Text style={[styleToApply(), props.color && {color: props.color}]}>
-        {props.title}
-      </Text>
+      <Text style={[styleToApply(), color && {color: color}]}>{title}</Text>
     </View>
   );
-};
-
-Header.default = {
-  title: '',
-  type: 1,
-  color: '#000',
 };
 
 Header.propTypes = {
