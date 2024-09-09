@@ -57,7 +57,7 @@ const Home = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={style.header}>
           <View>
-            <Text style={style.headerIntroText}>Hello~~</Text>
+            <Text style={style.headerIntroText}>Hello!!!!</Text>
             <View style={style.headerContainer}>
               <Header title={user.firstName + ' ' + user.lastName + '👋'} />
             </View>
